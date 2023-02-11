@@ -2,19 +2,19 @@ package org.example.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name= "cats")
 public class Cat {
 
     @Id @GeneratedValue
     private Long id;
-    //@Column(name="imya")
+    @Column(name="imya")
     private String name;
     private int weight;
     private boolean isAngry;
-   /* @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "miska_id")*/
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Bowl bowl;
 
     public Bowl getBowl() {
@@ -24,6 +24,30 @@ public class Cat {
     public void setBowl(Bowl bowl) {
         this.bowl = bowl;
     }
+
+    @Override
+    public String toString() {
+        return "Cat{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", weight=" + weight +
+                ", isAngry=" + isAngry +
+               // ", bowl=" + bowl +
+                '}';
+    }
+    /* @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "miska_id")*/
+   // @ManyToOne(cascade = CascadeType.MERGE)
+ // @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+  /* private List<Bowl> bowl;
+
+    public List<Bowl> getBowl() {
+        return bowl;
+    }
+
+    public void setBowl(List<Bowl> bowl) {
+        this.bowl = bowl;
+    }*/
 
     public Cat(String name, int weight, boolean isAngry) {
         this.name = name;
@@ -66,13 +90,5 @@ public class Cat {
         isAngry = angry;
     }
 
-    @Override
-    public String toString() {
-        return "Cat{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", weight=" + weight +
-                ", isAngry=" + isAngry +
-                '}';
-    }
+
 }

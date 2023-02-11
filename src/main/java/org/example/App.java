@@ -21,18 +21,42 @@ public class App
         CatRepository repoCat = context.getBean(CatRepository.class);
         BowlRepository repoBowl = context.getBean(BowlRepository.class);
 
+        Bowl tazik = new Bowl("Тазик");
+        repoBowl.save(tazik);
+
         Cat murzik = new Cat("Мурзик", 10, true);
         Cat barsik = new Cat("Барсик", 5, false);
         Cat murka = new Cat("Мурка", 2, false);
 
-        Bowl tazik = new Bowl("Тазик");
 
+        murka.setBowl(tazik);
         repoCat.save(murka);
-        repoCat.save(barsik);
-        repoCat.save(murzik);
 
-        tazik.setCat(Arrays.asList(murka, murzik, barsik));
-        repoBowl.save(tazik);
+        barsik.setBowl(tazik);
+        repoCat.save(barsik);
+
+        //tazik.setCat(Arrays.asList(murka, murzik, barsik));
+
+
+
+
+        System.out.println("Коты");
+        repoCat.findAll().forEach(System.out::println);
+
+        System.out.println("Миски:");
+        repoBowl.findAll().forEach(System.out::println);
+
+       /* Bowl koryto = new Bowl("Корыто");
+        Bowl vedro = new Bowl("Ведро");
+
+       // murzik.setBowl(Arrays.asList(tazik, koryto));
+       // barsik.setBowl(Arrays.asList(koryto,vedro));
+
+
+*/
+       /*
+
+       */
         /*repoCat.save(new Cat("Мурзик", 10, true));
         repoCat.save(new Cat("Барсик", 5, false));
         repoCat.save(new Cat("Мурка", 2, false));
@@ -41,18 +65,15 @@ public class App
         Bowl tazik = new Bowl("Тазик");
         murzik.setBowl(tazik);*/
 
-        System.out.println("Коты");
-        repoCat.findAll().forEach(System.out::println);
-        System.out.println("Миски:");
-        repoBowl.findAll().forEach(System.out::println);
 
-        repoCat.deleteById(1L);
+
+       /* repoCat.deleteById(1L);
 
         System.out.println("Коты");
         repoCat.findAll().forEach(System.out::println);
         System.out.println("Миски:");
         repoBowl.findAll().forEach(System.out::println);
-
+*/
        /* System.out.println("Толстые Коты");
         repoCat.findByWeightGreaterThan(4).forEach(System.out::println);
 

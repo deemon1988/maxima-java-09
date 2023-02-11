@@ -11,7 +11,8 @@ public class Bowl {
     private String name;
     /*@OneToOne(mappedBy = "bowl")
     private Cat cat;*/
-    @OneToMany(mappedBy = "bowl", cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "bowl", fetch = FetchType.EAGER)
+   // @ManyToMany(mappedBy = "bowl", fetch = FetchType.EAGER)
     private List<Cat> cat;
 
 
